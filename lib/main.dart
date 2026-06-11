@@ -5,7 +5,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,41 +22,50 @@ class MyApp extends StatelessWidget {
 }
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({super.key});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final TextEditingController _mobile = TextEditingController();
-  final TextEditingController _email = TextEditingController();
-  final TextEditingController _password = TextEditingController();
-  final TextEditingController _confirmPassword = TextEditingController();
+  TextEditingController mobileController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
 
-  bool _showPassword = false;
-  bool _showConfirmPassword = false;
+  bool showPassword = false;
+  bool showConfirmPassword = false;
 
   @override
   void dispose() {
-    _mobile.dispose();
-    _email.dispose();
-    _password.dispose();
-    _confirmPassword.dispose();
+    mobileController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
     super.dispose();
   }
 
-  InputDecoration _buildInputDecoration(String label, String hint,
+  void handleSignUp() {
+    if (formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Registration successful!'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  InputDecoration buildInputDecoration(String label, String hint,
       {Widget? suffixIcon}) {
     return InputDecoration(
       labelText: label,
       hintText: hint,
       suffixIcon: suffixIcon,
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
         borderSide: const BorderSide(color: Colors.grey),
@@ -72,17 +81,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void _handleSignUp() {
-    if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Registration successful!'),
-          duration: Duration(seconds: 2),
-        ),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,21 +92,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(height: 32),
             const Text(
               'Register',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 32),
             Form(
-              key: _formKey,
+              key: formKey,
               child: Column(
                 children: [
-                  // Mobile Field
+                  // Mobile Number Field
                   TextFormField(
-                    controller: _mobile,
+                    controller: mobileController,
                     keyboardType: TextInputType.phone,
-                    decoration: _buildInputDecoration(
+                    decoration: buildInputDecoration(
                       'Enter your mobile number',
                       '1712345678',
                       suffixIcon: const Icon(Icons.check_circle),
@@ -124,9 +119,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                   // Email Field
                   TextFormField(
-                    controller: _email,
+                    controller: emailController,
                     keyboardType: TextInputType.emailAddress,
-                    decoration: _buildInputDecoration(
+                    decoration: buildInputDecoration(
                       'Enter your email',
                       'abc12@gmail.com',
                     ),
@@ -141,19 +136,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                   // Password Field
                   TextFormField(
-                    controller: _password,
-                    obscureText: !_showPassword,
-                    decoration: _buildInputDecoration(
+                    controller: passwordController,
+                    obscureText: !showPassword,
+                    decoration: buildInputDecoration(
                       'Enter your password',
                       '',
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _showPassword
+                          showPassword
                               ? Icons.visibility
                               : Icons.visibility_off,
                         ),
                         onPressed: () {
-                          setState(() => _showPassword = !_showPassword);
+                          setState(() => showPassword = !showPassword);
                         },
                       ),
                     ),
@@ -168,20 +163,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                   // Confirm Password Field
                   TextFormField(
-                    controller: _confirmPassword,
-                    obscureText: !_showConfirmPassword,
-                    decoration: _buildInputDecoration(
+                    controller: confirmPasswordController,
+                    obscureText: !showConfirmPassword,
+                    decoration: buildInputDecoration(
                       'Re-Enter your password',
                       '',
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _showConfirmPassword
+                          showConfirmPassword
                               ? Icons.visibility
                               : Icons.visibility_off,
                         ),
                         onPressed: () {
-                          setState(() =>
-                              _showConfirmPassword = !_showConfirmPassword);
+                          setState(
+                              () => showConfirmPassword = !showConfirmPassword);
                         },
                       ),
                     ),
@@ -199,7 +194,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: _handleSignUp,
+                      onPressed: handleSignUp,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
                         shape: RoundedRectangleBorder(
@@ -229,16 +224,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 TextButton(
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Navigate to Sign In'),
-                        duration: Duration(seconds: 1),
-                      ),
+                      const SnackBar(content: Text('Navigate to Sign In')),
                     );
                   },
-                  child: const Text(
-                    'Sign in',
-                    style: TextStyle(color: Colors.blue),
-                  ),
+                  child: const Text('Sign in',
+                      style: TextStyle(color: Colors.blue)),
                 ),
               ],
             ),
@@ -258,11 +248,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(height: 20),
 
             // Google Button
-            _socialButton('Continue with Google', Icons.language),
+            buildSocialButton('Continue with Google', Icons.language),
             const SizedBox(height: 12),
 
             // Apple Button
-            _socialButton('Continue with Apple', Icons.apple),
+            buildSocialButton('Continue with Apple', Icons.apple),
             const SizedBox(height: 32),
           ],
         ),
@@ -270,7 +260,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget _socialButton(String text, IconData icon) {
+  Widget buildSocialButton(String text, IconData icon) {
     return SizedBox(
       width: double.infinity,
       height: 50,
@@ -281,9 +271,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           );
         },
         style: OutlinedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
