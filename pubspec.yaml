@@ -1,0 +1,14 @@
+name: counter_nav_app
+description: A Flutter Counter Navigation App demonstrating core Flutter concepts.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
