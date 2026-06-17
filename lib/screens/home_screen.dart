@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'details_screen.dart';
 
-/// HomeScreen displays a TabBar with a Counter tab and an Info tab.
-/// It uses DefaultTabController for tab state management.
+/// HomeScreen displays the Counter tab using DefaultTabController.
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -46,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 1,
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -66,7 +65,6 @@ class _HomeScreenState extends State<HomeScreen> {
             dividerColor: Colors.transparent,
             tabs: [
               Tab(text: 'Counter'),
-              Tab(text: 'Info'),
             ],
           ),
         ),
@@ -74,8 +72,6 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Counter Tab
             _buildCounterTab(context),
-            // Info Tab
-            _buildInfoTab(),
           ],
         ),
       ),
@@ -117,7 +113,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   foregroundColor: Colors.black,
                   side: BorderSide(color: Colors.grey.shade300),
                   shape: const StadiumBorder(),
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 ),
                 child: const Text(
                   'Increment',
@@ -133,7 +130,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   foregroundColor: Colors.black,
                   side: BorderSide(color: Colors.grey.shade300),
                   shape: const StadiumBorder(),
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 ),
                 child: const Text(
                   'Open Details',
@@ -147,30 +145,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  /// Builds the information tab view
-  Widget _buildInfoTab() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            'Flutter Counter Navigation App',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF1D1B20),
-            ),
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            'Built using StatefulWidget and Navigation',
-            style: TextStyle(
-              fontSize: 15,
-              color: Colors.grey,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
