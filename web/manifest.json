@@ -1,6 +1,6 @@
 {
-    "name": "register_app",
-    "short_name": "register_app",
+    "name": "student_profile_card_app",
+    "short_name": "student_profile_card_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
