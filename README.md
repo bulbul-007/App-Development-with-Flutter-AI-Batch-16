@@ -7,7 +7,7 @@ A clean, modern, and responsive Flutter application showcasing a Personal Profil
 Below is the profile image used at the top of the card:
 
 <p align="center">
-  <img src="c:\Users\HP\OneDrive\Pictures\Screenshots\Screenshot 2026-06-22 152549.png" alt="Profile Picture" width="180" style="border-radius: 50%; border: 4px solid #006EE6; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);"/>
+  <img src="./screenshot.png" alt="App Screenshot" width="400" style="border-radius: 12px; box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);"/>
 </p>
 
 ---
