@@ -1,57 +1,72 @@
 # Personal Profile Card App
 
-A modern, clean, and responsive Flutter application that displays a personal profile card with interactive elements, styled to match premium design specifications.
+A clean, modern, and responsive Flutter application showcasing a Personal Profile Card with interactive buttons and a grid-based Interests section.
 
-## 📱 Preview
+## 📱 Visual Output
+
+Below is the profile image used at the top of the card:
+
 <p align="center">
-  <img src="https://cdn.ostad.app/user/avatar/2025-12-28T11-05-54.599Z-IMG_20250907_125558.jpg" alt="Profile Picture" width="150" style="border-radius: 50%"/>
+  <img src="https://cdn.ostad.app/user/avatar/2025-12-28T11-05-54.599Z-IMG_20250907_125558.jpg" alt="Profile Picture" width="180" style="border-radius: 50%; border: 4px solid #006EE6; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);"/>
 </p>
 
 ---
 
-## ✨ Features
+## 🛠️ Widget Structure & Architecture
 
-- **Profile Card Section**:
-  - Centered professional profile picture using a `CircleAvatar`.
-  - Clean typography for the name, profession, and bio.
-  - Interactive **Follow** button (`StatefulWidget` using `setState`) with instantaneous snackbar alerts.
-  - **View Profile** button displaying detailed profile statistics in a styled `AlertDialog`.
-  - Icon-supported contacts for Email and Phone numbers.
-- **Interests Section**:
-  - Custom section header with split dividers.
-  - Twin card layout highlighting interests: **Travel** and **Photography**.
-  - Custom "View More" dialogue actions for each interest.
+The application has been structured cleanly inside a single screen following the recommended hierarchy:
+
+```
+MaterialApp
+└── Scaffold
+    └── SafeArea
+        └── SingleChildScrollView
+            └── Column
+                ├── Card (Profile Card)
+                │   └── Column
+                │       ├── CircleAvatar (Profile Image)
+                │       ├── Name (BULBUL AHMED)
+                │       ├── Profession (Flutter Developer)
+                │       ├── Bio Text
+                │       ├── Divider
+                │       ├── Email Row (Icon + Text)
+                │       ├── Phone Row (Icon + Text)
+                │       └── Buttons Row
+                │           ├── Follow Button (Elevated)
+                │           └── View Profile Button (Outlined)
+                ├── Divider Header ("Interests")
+                └── Row (Interests Cards)
+                    ├── Travel Card (Image + Details + Button)
+                    └── Photography Card (Image + Details + Button)
+```
 
 ---
 
-## 🛠️ Flutter Concepts Demonstrated
+## ✨ Features Implemented
 
-- **StatelessWidget** & **StatefulWidget**
-- State management utilizing `setState()`
-- Material 3 `Card`, `ElevatedButton`, and `OutlinedButton` design
-- `SnackBar` and `AlertDialog` component implementation
-- Network image loading via `Image.network` and `NetworkImage`
-- Custom typography, styling, padding, and spacing configurations
+1. **Stateful Follow Button**:
+   - Changes dynamically between **Follow** and **Following** when clicked using `setState()`.
+   - Displays a descriptive `SnackBar` at the bottom of the screen.
+2. **View Profile Alert Dialog**:
+   - Displays a styled pop-up custom dialog containing Name, Profession, Email, Phone, and Bio.
+   - Includes a custom-styled close button.
+3. **Interests Section**:
+   - Clean divided section showing cards with cover images (Travel & Photography).
+   - "View More" actions to view details in a dialog.
+4. **Professional UI Styling**:
+   - High-quality Material 3 design, custom elevations, soft shadows, rounded corners (`BorderRadius.circular(16)`), and responsive layout.
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Installation & Running
 
-To run this project locally, ensure you have Flutter installed.
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/bulbul-007/App-Development-with-Flutter-AI-Batch-16.git
-   cd "Personal Profile Card App"
-   ```
-
-2. **Get dependencies**:
+1. **Get Dependencies**:
    ```bash
    flutter pub get
    ```
-
-3. **Run the app**:
+2. **Run the App**:
    ```bash
    flutter run
    ```
+
 
